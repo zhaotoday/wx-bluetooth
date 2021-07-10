@@ -1,2 +1,11 @@
 # wx-bluetooth
-使用 EventEmitter2（观察者模式）封装微信蓝牙 API。
+```
+$ npm install wx-bluetooth
+```
+
+```js
+import { useBluetooth } from 'wx-bluetooth/composables/use-bluetooth';
+
+const { on, off, tryOpenAdpeter } = useBluetooth({ emits: ['adpter-state-change'] })
+// ...
+```
