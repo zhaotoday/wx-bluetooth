@@ -4,8 +4,11 @@
   "description": "bluetooth apis",
   "main": "index.js",
   "dependencies": {
+    "async": "^3.2.0",
     "eventemitter2": "^6.4.4",
-    "jt-helpers": "^1.0.1"
+    "jt-helpers": "^1.0.1",
+    "vuex-composition-helpers": "^1.0.23",
+    "wx-bridge": "0.0.38"
   },
   "devDependencies": {},
   "scripts": {
