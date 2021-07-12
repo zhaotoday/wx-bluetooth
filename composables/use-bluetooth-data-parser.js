@@ -14,7 +14,10 @@ export const useBluetoothDataParser = () => {
 
   // 16 进制转 10 进制
   const hexToDecimal = (hex, signed = true) => {
-    return parseInt((signed ? "0000" : "FFFF") + hex.split(" ").join(""), 16);
+    return (
+      parseInt((signed ? "0000" : "FFFF") + hex.split(" ").join(""), 16) |
+      0xffffffff00000000
+    );
   };
 
   // 16 进制转 2 进制
