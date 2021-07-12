@@ -70,7 +70,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
         });
       });
 
-      cb();
+      cb && cb();
     });
 
     return ret;
