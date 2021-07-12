@@ -49,6 +49,11 @@ export const useBluetoothDataParser = () => {
     return fillZero(parseInt(sumHex(hex) % 256).toString(16), 2);
   };
 
+  // 拼接上校验位
+  const joinWithCs = (hex) => {
+    return hex + " " + cs(hex);
+  };
+
   // 校验 16 进制数据是否合法
   const isAvailableHex = (hex) => {
     return (
@@ -65,6 +70,7 @@ export const useBluetoothDataParser = () => {
     hexToBinary,
     sumHex,
     cs,
+    joinWithCs,
     isAvailableHex,
   };
 };
