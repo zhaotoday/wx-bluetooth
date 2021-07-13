@@ -15,9 +15,9 @@ export const useBluetoothPipe = () => {
   // 16 进制转有符号 10 进制
   // 参考：https://www.cnblogs.com/BlackFungus/p/9473008.html
   const hexToDecimal = (hex) => {
-    let binary = parseInt(hex, 16).toString(2);
+    let binary = parseInt(hex.split(" ").join(""), 16).toString(2);
 
-    const binaryLength = hex.length * 4;
+    const binaryLength = hex.split(" ").join("").length * 4;
 
     if (binary.length < binaryLength) {
       while (binary.length < binaryLength) {
