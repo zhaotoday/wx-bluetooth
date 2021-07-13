@@ -1,4 +1,4 @@
-export const useBluetoothDataParser = () => {
+export const useBluetoothPipe = () => {
   // 补零
   const fillZero = (string, length) => {
     return (Array(length).join(0) + string).slice(-length);
@@ -13,7 +13,7 @@ export const useBluetoothDataParser = () => {
   };
 
   // 16 进制转 10 进制
-  const hexToDecimal = (hex, signed = false) => {
+  const hexToDecimal = (hex, signed = true) => {
     return (
       parseInt((signed ? "FFFF" : "0000") + hex.split(" ").join(""), 16) |
       0xffffffff00000000
