@@ -12,12 +12,34 @@ export const useBluetoothPipe = () => {
       .join(" ");
   };
 
-  // 16 进制转 10 进制
-  const hexToDecimal = (hex, signed = true) => {
-    return (
-      parseInt((signed ? "FFFF" : "0000") + hex.split(" ").join(""), 16) |
-      0xffffffff00000000
-    );
+  // 16 进制转有符号 10 进制
+  // 参考：https://www.cnblogs.com/BlackFungus/p/9473008.html
+  const hexToDecimal = (hex) => {
+    let binary = parseInt(hex, 16).toString(2);
+
+    const binaryLength = hex.length * 4;
+
+    if (binary.length < binaryLength) {
+      while (binary.length < binaryLength) {
+        binary = "0" + binary;
+      }
+    }
+
+    if (binary.substring(0, 1) === "0") {
+      return parseInt(binary, 2);
+    } else {
+      let unsignedBinary = "";
+
+      binary = parseInt(binary, 2) - 1;
+      binary = binary.toString(2);
+
+      unsignedBinary = binary.substring(1, binaryLength);
+      unsignedBinary = unsignedBinary.replace(/0/g, "z");
+      unsignedBinary = unsignedBinary.replace(/1/g, "0");
+      unsignedBinary = unsignedBinary.replace(/z/g, "1");
+
+      return parseInt(-unsignedBinary, 2);
+    }
   };
 
   // 16 进制转 2 进制
