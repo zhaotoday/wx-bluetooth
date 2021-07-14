@@ -14,31 +14,35 @@ export const useBluetoothPipe = () => {
 
   // 16 进制转有符号 10 进制
   // 参考：https://www.cnblogs.com/BlackFungus/p/9473008.html
-  const hexToDecimal = (hex) => {
-    let binary = parseInt(hex.split(" ").join(""), 16).toString(2);
-
-    const binaryLength = hex.split(" ").join("").length * 4;
-
-    if (binary.length < binaryLength) {
-      while (binary.length < binaryLength) {
-        binary = "0" + binary;
-      }
-    }
-
-    if (binary.substring(0, 1) === "0") {
-      return parseInt(binary, 2);
+  const hexToDecimal = (hex, unsigned = false) => {
+    if (unsigned) {
+      return parseInt(hex.split(" ").join(""), 16);
     } else {
-      let unsignedBinary = "";
+      let binary = parseInt(hex.split(" ").join(""), 16).toString(2);
 
-      binary = parseInt(binary, 2) - 1;
-      binary = binary.toString(2);
+      const binaryLength = hex.split(" ").join("").length * 4;
 
-      unsignedBinary = binary.substring(1, binaryLength);
-      unsignedBinary = unsignedBinary.replace(/0/g, "z");
-      unsignedBinary = unsignedBinary.replace(/1/g, "0");
-      unsignedBinary = unsignedBinary.replace(/z/g, "1");
+      if (binary.length < binaryLength) {
+        while (binary.length < binaryLength) {
+          binary = "0" + binary;
+        }
+      }
 
-      return parseInt(-unsignedBinary, 2);
+      if (binary.substring(0, 1) === "0") {
+        return parseInt(binary, 2);
+      } else {
+        let unsignedBinary = "";
+
+        binary = parseInt(binary, 2) - 1;
+        binary = binary.toString(2);
+
+        unsignedBinary = binary.substring(1, binaryLength);
+        unsignedBinary = unsignedBinary.replace(/0/g, "z");
+        unsignedBinary = unsignedBinary.replace(/1/g, "0");
+        unsignedBinary = unsignedBinary.replace(/z/g, "1");
+
+        return parseInt(-unsignedBinary, 2);
+      }
     }
   };
 
@@ -49,7 +53,7 @@ export const useBluetoothPipe = () => {
 
   // 16 进制转 10 进制数组
   const hexToDecimalArray = (hex) => {
-    return hex.split(" ").map((item) => hexToDecimal(item));
+    return hex.split(" ").map((item) => hexToDecimal(item, true));
   };
 
   // 16 进制转 10 进制
