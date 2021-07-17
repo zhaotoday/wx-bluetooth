@@ -25,7 +25,7 @@ export const useBluetoothPipe = () => {
 
   // 10 进制转 16 进制
   // 参考：https://blog.csdn.net/qq_15801963/article/details/108110061
-  const decimalToHex = (decimal, length, unsigned = false) => {
+  const decimalToHex = (decimal, length = 2, unsigned = false) => {
     var num = parseInt(decimal);
     var hex = "";
     var hexLength = length * 2; //1个字节=2个16进制字符
@@ -72,7 +72,7 @@ export const useBluetoothPipe = () => {
       }
     }
 
-    return splitString(hex, 2);
+    return splitString(hex, length);
   };
 
   // 16 进制转有符号 10 进制
