@@ -41,9 +41,11 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     });
   };
 
-  wx.getBluetoothAdapterState().then(({ available }) => {
-    available && emitter.emit("adapter-ready");
-  });
+  const adapterReady = () => {
+    if (available.value) {
+      emitter.emit("adapter-ready");
+    }
+  };
 
   const getAllDeviceCharacteristics = async ({ deviceId }) => {
     const ret = {
@@ -175,6 +177,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     on,
     off,
     tryOpenAdapter,
+    adapterReady,
     getAllDeviceCharacteristics,
     writeCharacteristicValue: wx.writeBLECharacteristicValue,
     setMTU: wx.setBLEMTU,
