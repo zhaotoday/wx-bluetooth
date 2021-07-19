@@ -45,10 +45,6 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     available && emitter.emit("adapter-ready");
   });
 
-  const closeAdapter = () => {
-    return wx.closeBluetoothAdapter();
-  };
-
   const getAllDeviceCharacteristics = async ({ deviceId }) => {
     const ret = {
       notify: {},
@@ -196,7 +192,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     getConnectedDevices: wx.getConnectedBluetoothDevices,
     getDevices: wx.getBluetoothDevices,
     getAdapterState: wx.getBluetoothAdapterState,
-    closeAdapter,
+    closeAdapter: wx.closeBluetoothAdapter,
     arrayBufferToHex,
     hexToArrayBuffer,
   };
