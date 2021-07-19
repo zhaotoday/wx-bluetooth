@@ -143,6 +143,11 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     }
   };
 
+  const closeAdapter = () => {
+    setAvailable({ available: false });
+    return wx.closeBluetoothAdapter();
+  };
+
   const arrayBufferToHex = (arrayBuffer) => {
     const hexArr = Array.prototype.map.call(
       new Uint8Array(arrayBuffer),
@@ -195,7 +200,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     getConnectedDevices: wx.getConnectedBluetoothDevices,
     getDevices: wx.getBluetoothDevices,
     getAdapterState: wx.getBluetoothAdapterState,
-    closeAdapter: wx.closeBluetoothAdapter,
+    closeAdapter,
     arrayBufferToHex,
     hexToArrayBuffer,
   };
