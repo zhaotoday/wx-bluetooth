@@ -4,8 +4,9 @@ import { eachSeries } from "async";
 import { createNamespacedHelpers } from "vuex-composition-helpers";
 import { store } from "@/store";
 
+const emitter = new EventEmitter2();
+
 export const useBluetooth = ({ emits = [] } = {}) => {
-  const emitter = new EventEmitter2();
   const { useActions, useState } = createNamespacedHelpers(store, "bluetooth");
   const { available, foundDevices, connectedDeviceIds } = useState([
     "available",
