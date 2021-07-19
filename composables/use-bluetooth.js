@@ -29,6 +29,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
       wx.openBluetoothAdapter()
         .then((res) => {
           setAvailable({ available: true });
+          emitter.emit("adapter-ready");
           resolve(res);
         })
         .catch((err) => {
@@ -39,6 +40,10 @@ export const useBluetooth = ({ emits = [] } = {}) => {
         });
     });
   };
+
+  wx.getBluetoothAdapterState().then(({ available }) => {
+    available && emitter.emit("adapter-ready");
+  });
 
   const closeAdapter = () => {
     return wx.closeBluetoothAdapter();
