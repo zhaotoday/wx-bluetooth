@@ -143,6 +143,7 @@ export const useBluetoothPipe = () => {
   };
 
   return {
+    fillZero,
     subHex,
     hexToDecimal,
     hexToDecimalArray,
