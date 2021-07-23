@@ -149,6 +149,10 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     return wx.closeBluetoothAdapter();
   };
 
+  const startDevicesDiscovery = () => {
+    foundDevices.value = [];
+  };
+
   const arrayBufferToHex = (arrayBuffer) => {
     const hexArr = Array.prototype.map.call(
       new Uint8Array(arrayBuffer),
