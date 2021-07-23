@@ -10,7 +10,7 @@ const types = helpers.keyMirror({
   SetAvailable: null,
   AddFoundDevice: null,
   DeleteFoundDevice: null,
-  ClearFoundDevice: null,
+  ClearFoundDevices: null,
   SetConnectedDeviceIds: null,
 });
 
@@ -36,7 +36,7 @@ const mutations = {
       state.foundDevices.splice(index, 1);
     }
   },
-  [types.ClearFoundDevice](state) {
+  [types.ClearFoundDevices](state) {
     state.foundDevices = [];
   },
   [types.SetConnectedDeviceIds](state, { deviceId, connected }) {
@@ -64,8 +64,8 @@ const actions = {
   deleteFoundDevice({ commit }, { deviceId }) {
     commit(types.DeleteFoundDevice, { deviceId });
   },
-  clearFoundDevice({ commit }) {
-    commit(types.ClearFoundDevice);
+  clearFoundDevices({ commit }) {
+    commit(types.ClearFoundDevices);
   },
   setConnectedDeviceIds({ commit }, { deviceId, connected }) {
     commit(types.SetConnectedDeviceIds, { deviceId, connected });

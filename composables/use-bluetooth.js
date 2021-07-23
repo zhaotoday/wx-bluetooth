@@ -17,11 +17,13 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     setAvailable,
     addFoundDevice,
     deleteFoundDevice,
+    clearFoundDevices,
     setConnectedDeviceIds,
   } = useActions([
     "setAvailable",
     "addFoundDevice",
     "deleteFoundDevice",
+    "clearFoundDevices",
     "setConnectedDeviceIds",
   ]);
 
@@ -151,6 +153,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
 
   const startDevicesDiscovery = () => {
     foundDevices.value = [];
+    return wx.startBluetoothDevicesDiscovery();
   };
 
   const arrayBufferToHex = (arrayBuffer) => {
@@ -200,7 +203,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     createConnection: wx.createBLEConnection,
     closeConnection: wx.closeBLEConnection,
     stopDevicesDiscovery: wx.stopBluetoothDevicesDiscovery,
-    startDevicesDiscovery: wx.startBluetoothDevicesDiscovery,
+    startDevicesDiscovery,
     openAdapter: wx.openBluetoothAdapter,
     getConnectedDevices: wx.getConnectedBluetoothDevices,
     getDevices: wx.getBluetoothDevices,
