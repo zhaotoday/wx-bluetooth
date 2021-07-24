@@ -151,8 +151,8 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     return wx.closeBluetoothAdapter();
   };
 
-  const startDevicesDiscovery = () => {
-    foundDevices.value = [];
+  const startDevicesDiscovery = async () => {
+    await clearFoundDevices();
     return wx.startBluetoothDevicesDiscovery();
   };
 
