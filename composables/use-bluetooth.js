@@ -36,7 +36,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
           resolve(res);
         })
         .catch((err) => {
-          if (err.errCode === "10001") {
+          if (err.errCode === 10001) {
             wx.showToast({ title: "请开启手机蓝牙" });
             setAvailable({ available: false });
             setConnectedDeviceIds({ deviceId: "", connected: false });
