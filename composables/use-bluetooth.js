@@ -29,7 +29,11 @@ export const useBluetooth = ({ emits = [] } = {}) => {
 
   const tryOpenAdapter = () => {
     return new Promise((resolve, reject) => {
-      wx.openBluetoothAdapter()
+      wx.openBluetoothAdapter({
+        complete() {
+          emitter.emit("open-adapter-complete");
+        },
+      })
         .then((res) => {
           setAvailable({ available: true });
           emitter.emit("adapter-ready");
