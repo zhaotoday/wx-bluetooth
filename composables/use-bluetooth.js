@@ -36,7 +36,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
       })
         .then((res) => {
           setAvailable({ available: true });
-          emitter.emit("adapter-ready");
+          emitter.emit("open-adapter-success");
           resolve(res);
         })
         .catch((err) => {
@@ -50,9 +50,9 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     });
   };
 
-  const adapterReady = () => {
+  const openAdapterSuccess = () => {
     if (available.value) {
-      emitter.emit("adapter-ready");
+      emitter.emit("open-adapter-success");
     }
   };
 
@@ -196,7 +196,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     on,
     off,
     tryOpenAdapter,
-    adapterReady,
+    openAdapterSuccess,
     getAllDeviceCharacteristics,
     writeCharacteristicValue: wx.writeBLECharacteristicValue,
     setMTU: wx.setBLEMTU,
