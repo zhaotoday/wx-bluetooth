@@ -31,12 +31,11 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     return new Promise((resolve, reject) => {
       wx.openBluetoothAdapter({
         complete() {
-          emitter.emit("open-adapter-complete");
+          addEventListeners();
         },
       })
         .then((res) => {
           setAvailable({ available: true });
-          emitter.emit("open-adapter-success");
           resolve(res);
         })
         .catch((err) => {
@@ -48,12 +47,6 @@ export const useBluetooth = ({ emits = [] } = {}) => {
           reject(err);
         });
     });
-  };
-
-  const openAdapterSuccess = () => {
-    if (available.value) {
-      emitter.emit("open-adapter-success");
-    }
   };
 
   const getAllDeviceCharacteristics = async ({ deviceId }) => {
@@ -88,7 +81,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     return ret;
   };
 
-  const addListeners = () => {
+  const addEventListeners = () => {
     if (emits.includes("adapter-state-change")) {
       wx.onBluetoothAdapterStateChange(({ available, discovering }) => {
         setAvailable({ available });
@@ -192,11 +185,10 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     deleteFoundDevice,
     connectedDeviceIds,
     setAvailable,
-    addListeners,
+    addEventListeners,
     on,
     off,
     tryOpenAdapter,
-    openAdapterSuccess,
     getAllDeviceCharacteristics,
     writeCharacteristicValue: wx.writeBLECharacteristicValue,
     setMTU: wx.setBLEMTU,
