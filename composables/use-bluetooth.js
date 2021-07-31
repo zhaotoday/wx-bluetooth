@@ -83,12 +83,16 @@ export const useBluetooth = ({ emits = [] } = {}) => {
 
   const addEventListeners = () => {
     if (emits.includes("adapter-state-change")) {
+      let adapterStateChangeTimer = null;
+
       wx.onBluetoothAdapterStateChange(({ available, discovering }) => {
         if (available) {
           setAvailable({ available });
           emitter.emit("adapter-state-change", { available, discovering });
         } else {
-          setTimeout(async () => {
+          clearTimeout(adapterStateChangeTimer);
+
+          adapterStateChangeTimer = setTimeout(async () => {
             const { available: adapterAvailable } =
               await wx.getBluetoothAdapterState();
 
