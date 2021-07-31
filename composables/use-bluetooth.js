@@ -84,14 +84,21 @@ export const useBluetooth = ({ emits = [] } = {}) => {
   const addEventListeners = () => {
     if (emits.includes("adapter-state-change")) {
       wx.onBluetoothAdapterStateChange(({ available, discovering }) => {
-        setAvailable({ available });
+        if (available) {
+          setAvailable({ available });
+          emitter.emit("adapter-state-change", { available, discovering });
+        } else {
+          setTimeout(async () => {
+            const { available: adapterAvailable } =
+              await wx.getBluetoothAdapterState();
 
-        if (!available) {
-          wx.showToast({ title: "请开启手机蓝牙" });
-          setConnectedDeviceIds({ deviceId: "", connected: false });
+            if (!adapterAvailable) {
+              wx.showToast({ title: "请开启手机蓝牙" });
+              setConnectedDeviceIds({ deviceId: "", connected: false });
+              emitter.emit("adapter-state-change", { available, discovering });
+            }
+          }, 2000);
         }
-
-        emitter.emit("adapter-state-change", { available, discovering });
       });
     }
 
