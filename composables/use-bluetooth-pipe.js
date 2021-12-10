@@ -111,7 +111,7 @@ export const useBluetoothPipe = () => {
 
   // 16 进制转 2 进制
   const hexToBinary = (hex) => {
-    return hexToDecimal(hex).toString(2);
+    return hexToDecimal(hex, true).toString(2);
   };
 
   // 16 进制转 10 进制数组
