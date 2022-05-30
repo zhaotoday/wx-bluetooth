@@ -152,6 +152,7 @@ export const useBluetoothPipe = () => {
     sumHex,
     cs,
     joinWithCs,
+    splitString,
     isAvailableHex,
   };
 };
