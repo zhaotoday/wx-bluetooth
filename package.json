@@ -1,7 +1,7 @@
 {
   "name": "wx-bluetooth",
-  "version": "0.0.35",
-  "description": "bluetooth apis",
+  "version": "0.0.36",
+  "description": "wx bluetooth apis",
   "main": "index.js",
   "dependencies": {
     "async": "^3.2.0",
@@ -9,17 +9,6 @@
     "jt-helpers": "^1.0.1",
     "vuex-composition-helpers": "^1.0.23",
     "wx-bridge": "0.0.38"
-  },
-  "devDependencies": {
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.30.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.13.0",
-    "prettier": "^2.3.2"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
