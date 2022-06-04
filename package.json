@@ -1,6 +1,6 @@
 {
   "name": "wx-bluetooth",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "wx bluetooth apis",
   "main": "index.js",
   "dependencies": {

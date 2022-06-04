@@ -189,6 +189,21 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     return arrayBuffer;
   };
 
+  const notifyCharacteristicValueChange = ({ deviceId, characteristics }) => {
+    [characteristics.notify, characteristics.indicate].forEach(
+      (characteristic) => {
+        if (characteristic.uuid) {
+          wx.notifyBLECharacteristicValueChange({
+            deviceId,
+            serviceId: characteristic.serviceId,
+            characteristicId: characteristic.uuid,
+            state: true,
+          });
+        }
+      }
+    );
+  };
+
   return {
     emitter,
     available,
@@ -204,7 +219,7 @@ export const useBluetooth = ({ emits = [] } = {}) => {
     writeCharacteristicValue: wx.writeBLECharacteristicValue,
     setMTU: wx.setBLEMTU,
     readCharacteristicValue: wx.readBLECharacteristicValue,
-    notifyCharacteristicValueChange: wx.notifyBLECharacteristicValueChange,
+    notifyCharacteristicValueChange,
     makeBluetoothPair: wx.makeBluetoothPair,
     getDeviceServices: wx.getBLEDeviceServices,
     getDeviceRSSI: wx.getBLEDeviceRSSI,
